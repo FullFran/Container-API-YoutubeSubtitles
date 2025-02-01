@@ -15,7 +15,6 @@ async def get_subtitles(video_id: str):
             if not transcript.is_generated:  # Verifica si es manual
                 try:
                     subtitles = transcript.fetch()
-                    subtitles = " ".join([entry["text"] for entry in subtitles])
                     return {
                         "video_id": video_id,
                         "language": transcript.language,
@@ -30,7 +29,6 @@ async def get_subtitles(video_id: str):
             if transcript.is_generated:  # Verifica si es automático
                 try:
                     subtitles = transcript.fetch()
-                    subtitles = " ".join([entry["text"] for entry in subtitles])
                     return {
                         "video_id": video_id,
                         "language": transcript.language,
@@ -49,4 +47,3 @@ async def get_subtitles(video_id: str):
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
-
